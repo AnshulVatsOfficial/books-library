@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -11,9 +12,7 @@ import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      process.env.MONGODB_URI || 'mongodb://localhost:27017/books-library',
-    ),
+    MongooseModule.forRoot(process.env.MONGODB_URI as string),
     ThrottlerModule.forRoot([
       {
         ttl: 60000,

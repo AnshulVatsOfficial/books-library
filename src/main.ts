@@ -1,13 +1,11 @@
+import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { configDotenv } from 'dotenv';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('/api');
-
-  configDotenv();
 
   if (process.env.NODE_ENV !== 'production') {
     const config = new DocumentBuilder()
