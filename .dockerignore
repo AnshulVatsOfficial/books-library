@@ -1,0 +1,72 @@
+# ==============================================================================
+# .dockerignore
+# Exclude unnecessary files and directories from Docker build context
+# ==============================================================================
+
+# Dependencies (avoid copying host platform-specific binaries)
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+.tsbuildinfo
+
+# Environment variables and sensitive files
+.env
+.env.*
+!.env.example
+
+# Git version control
+.git/
+.gitignore
+.gitattributes
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Tests, coverage, and reports
+coverage/
+test/
+test-results/
+**/*.spec.ts
+**/*.test.ts
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Docker files (prevent build cache invalidation on docker config changes)
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Temporary directories and runtime data
+.temp/
+.tmp/
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Documentation
+*.md
+!README.md
