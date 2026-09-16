@@ -9,18 +9,19 @@ async function bootstrap() {
 
   configDotenv();
 
-  const config = new DocumentBuilder()
-    .setTitle('Books Library API')
-    .setDescription('API documentation for Books Library system')
-    .setVersion('1.0')
-    .addBearerAuth()
-    .build();
-
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/docs', app, document);
+  if (process.env.NODE_ENV !== 'production') {
+    const config = new DocumentBuilder()
+      .setTitle('Books Library API')
+      .setDescription('API documentation for Books Library system')
+      .setVersion('1.0')
+      .addBearerAuth()
+      .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api/docs', app, document);
+  }
 
   await app.listen(process.env.PORT ?? 8080);
   console.log(`Application is running on: ${await app.getUrl()}`);
-  console.log(`Swagger documentation available at: ${await app.getUrl()}/api/docs`);
+  console.log(`Swagger documentation available at: ${await app.getUrl()}/docs`);
 }
 bootstrap();

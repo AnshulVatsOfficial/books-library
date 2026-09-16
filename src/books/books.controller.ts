@@ -22,6 +22,7 @@ import {
   ApiBearerAuth,
   ApiConsumes,
 } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
@@ -34,6 +35,7 @@ import { AuthGuard } from 'src/guards/auth.guard';
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
+  @Throttle({ default: { limit: 5, ttl: 60000 } })
   @Post('upload')
   @ApiOperation({ summary: 'Upload a new book with binary file' })
   @ApiConsumes('multipart/form-data')
