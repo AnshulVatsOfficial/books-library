@@ -51,7 +51,10 @@ export class BooksController {
   @Get(':id/file')
   @ApiOperation({ summary: 'Stream/Download a book file by ID' })
   @ApiResponse({ status: 200, description: 'Streams the book file.' })
-  async streamFile(@Param('id') id: string, @Res() res: Response) {
+  async streamFile(
+    @Param('id') id: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const file = await this.booksService.getBookById(id);
 
     res.set({

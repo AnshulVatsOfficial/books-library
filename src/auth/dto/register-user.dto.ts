@@ -2,6 +2,7 @@ import {
   IsArray,
   IsEmail,
   IsNotEmpty,
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -20,6 +21,8 @@ export class CreateUserDto {
   @MaxLength(20, { message: 'Password must be at most 20 characters long.' })
   password: string;
 
+  @IsOptional()
   @IsArray()
-  booksBorrowed: string[];
+  @IsString({ each: true })
+  booksBorrowed?: string[];
 }
